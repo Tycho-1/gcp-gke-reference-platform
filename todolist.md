@@ -42,11 +42,9 @@ Aligned with [`platform-requirements.md`](platform-requirements.md). Priority or
 
 ---
 
-## P3 — CI/CD (GitLab)
+## P3 — CI/CD (deploy pipeline)
 
-- [ ] **`.gitlab-ci.yml`** — build (Kaniko) → AR → `helm upgrade`
-- [ ] Review env per branch (`review-$CI_COMMIT_REF_SLUG`)
-- [ ] Doc: GitLab self-hosted ops vs GitLab.com for lab
+- [ ] GHA (or doc-only): build (Kaniko) → Artifact Registry → fleet GitOps update
 - [ ] Keyless CI auth: Workload Identity Federation (GitHub OIDC → GCP) in `bootstrap/`
 - [ ] `terraform plan` on PR + manual-approval `apply` workflow
 

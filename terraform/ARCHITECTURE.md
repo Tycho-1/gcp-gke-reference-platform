@@ -284,7 +284,7 @@ flowchart LR
 
 - **Version-pinned modules** in prod (`source = "git::…?ref=vX.Y.Z"`) so dev can test module changes first.
 - **Per-app Workload Identity** bindings (ESO, demo app) via upstream `workload-identity` submodule in environment TF.
-- **Artifact Registry** + GitLab CI pipeline.
+- **Artifact Registry** + CI deploy pipeline (GHA; see `todolist.md` P3).
 - **Private endpoint only** + **VPN / IAP / bastion** for prod API access.
 - **Gateway API / cert-manager / ESO** in fleet repo — not in foundation module.
 

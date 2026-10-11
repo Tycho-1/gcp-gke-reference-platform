@@ -79,7 +79,7 @@ CI: `.github/workflows/ci.yml` — see [`.github/CI.md`](.github/CI.md) (fmt/val
 1. **P0:** `git init`, push GitHub, one successful `apply` + screenshot, portfolio card
 2. **P1:** Artifact Registry in TF, Workload Identity, optional rename env → `dev`
 3. **P2:** ESO, cert-manager, demo Helm chart, HPA + load test
-4. **P3:** `.gitlab-ci.yml` — Kaniko → AR → helm upgrade
+4. **P3:** deploy pipeline (Kaniko → AR → GitOps) + WIF for GHA; `terraform plan` on PR
 
 ---
 

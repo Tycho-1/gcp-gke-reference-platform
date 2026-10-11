@@ -23,7 +23,7 @@ Base requirements for a **GKE reference platform**, aligned with container platf
 | **Ingress / Gateway** | HTTP routing to apps | 📋 todo (nginx or GKE ingress) |
 | **Cloud CDN + HTTP(S) LB** | Edge cache, TLS termination | 📋 todo |
 | **CI quality gates** | fmt, validate, tflint, Trivy, kubeconform | ✅ `.github/workflows/ci.yml` |
-| **GitLab CI** (or GHA) | Build image → deploy | 📋 `.gitlab-ci.yml` planned |
+| **CI deploy** (GHA) | Build image → Artifact Registry → GitOps | 📋 P3 in `todolist.md` |
 | **HPA + metrics** | Pod autoscaling demo | 📋 todo |
 | **Monitoring / alerting** | Prometheus/GMP, alerts | 📋 todo |
 | **Kyverno / policy** | Guardrails for many devs | 📋 todo |
