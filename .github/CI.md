@@ -1,5 +1,7 @@
 # GitHub automation
 
+> **Note:** Do not add `README.md` in this folder — GitHub shows it **instead of** the repository root [`README.md`](../README.md). See [About READMEs](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes).
+
 ## Continuous integration
 
 Workflow: [`workflows/ci.yml`](workflows/ci.yml)

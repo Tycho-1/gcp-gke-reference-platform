@@ -124,7 +124,7 @@ bash scripts/terraform-validate.sh   # fmt -check + validate for every root
 pre-commit install                   # optional: same checks on every commit
 ```
 
-CI jobs (tflint, Trivy, kubeconform): [`.github/README.md`](.github/README.md).
+CI jobs (tflint, Trivy, kubeconform): [`.github/CI.md`](.github/CI.md).
 
 ---
 

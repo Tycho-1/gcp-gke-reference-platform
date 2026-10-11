@@ -36,7 +36,7 @@ Terraform reference platform for **GKE on Google Cloud**:
 | `trivy config terraform --skip-dirs '**/.terraform' --ignorefile .trivyignore.yaml --severity HIGH,CRITICAL` | IaC misconfig scan (same as CI) |
 | `pre-commit run -a` | All local hooks |
 
-CI: `.github/workflows/ci.yml` — see [`.github/README.md`](.github/README.md) (fmt/validate, tflint, Trivy, kubeconform on every PR).
+CI: `.github/workflows/ci.yml` — see [`.github/CI.md`](.github/CI.md) (fmt/validate, tflint, Trivy, kubeconform on every PR). Do not add `.github/README.md` (GitHub uses it ahead of root README).
 
 **Auth:** `gcloud auth application-default login` — see [`terraform/docs/gcp-authentication-for-terraform.md`](terraform/docs/gcp-authentication-for-terraform.md).
 
