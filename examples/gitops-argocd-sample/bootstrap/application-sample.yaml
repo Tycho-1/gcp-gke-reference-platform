@@ -1,0 +1,24 @@
+# Optional: kubectl apply -n argocd -f application-sample.yaml
+# Replace repoURL with your Git remote. Path must contain kustomization.yaml or plain manifests.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sample-app-gitops
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/YOUR_ORG/YOUR_REPO.git
+    targetRevision: HEAD
+    path: apps/sample-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sample-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

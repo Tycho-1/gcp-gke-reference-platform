@@ -1,0 +1,91 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TF_IN_AUTOMATION: "true"
+  TFLINT_VERSION: v0.64.0
+  TRIVY_VERSION: v0.74.0
+  KUBECONFORM_VERSION: v0.8.0
+
+jobs:
+  terraform:
+    name: terraform fmt + validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "~1.16"
+          terraform_wrapper: false
+      - run: bash scripts/terraform-validate.sh
+
+  tflint:
+    name: tflint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/cache@v6
+        with:
+          path: ~/.tflint.d/plugins
+          key: tflint-${{ hashFiles('.tflint.hcl') }}
+      - uses: terraform-linters/setup-tflint@v6
+        with:
+          tflint_version: ${{ env.TFLINT_VERSION }}
+      - run: tflint --init --config "$GITHUB_WORKSPACE/.tflint.hcl"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - run: tflint --recursive --config "$GITHUB_WORKSPACE/.tflint.hcl" --format compact
+
+  trivy:
+    name: trivy (IaC misconfig + secrets)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: aquasecurity/setup-trivy@v0.3.1
+        with:
+          version: ${{ env.TRIVY_VERSION }}
+          cache: true
+      - name: Terraform misconfigurations (blocking)
+        run: >-
+          trivy config terraform
+          --skip-dirs '**/.terraform'
+          --severity HIGH,CRITICAL
+          --ignorefile .trivyignore.yaml
+          --exit-code 1
+      - name: Example manifests (report only)
+        run: >-
+          trivy config examples
+          --severity HIGH,CRITICAL
+          --exit-code 0
+      - name: Secret scan (blocking)
+        run: trivy fs . --scanners secret --exit-code 1
+
+  kubeconform:
+    name: kubeconform (example manifests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install kubeconform
+        run: |
+          curl -sSL "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" \
+            | tar xz -C /usr/local/bin kubeconform
+      - name: Validate
+        run: >-
+          kubeconform -strict -summary
+          -ignore-missing-schemas
+          -ignore-filename-pattern 'kustomization\.yaml$'
+          -schema-location default
+          -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json'
+          examples/flux-fleet-sample examples/gitops-argocd-sample examples/gitops-flux-sample

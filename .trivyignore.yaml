@@ -1,0 +1,16 @@
+# Trivy findings reviewed and accepted. Each entry must say why.
+misconfigurations:
+  - id: GCP-0057
+    paths:
+      - "terraform-google-modules/kubernetes-engine/google/modules/private-cluster/**"
+    statement: >-
+      False positive: upstream private-cluster sets workload_metadata_config via a
+      dynamic block. identity_namespace = "enabled" gives every pool GKE_METADATA
+      (Workload Identity), which Trivy cannot resolve statically.
+  - id: GCP-0061
+    paths:
+      - "terraform-google-modules/kubernetes-engine/google/modules/private-cluster/**"
+    statement: >-
+      False positive: master_authorized_networks_config is a dynamic block upstream.
+      Both environments make master_authorized_networks a required input and
+      validations.tf warns on 0.0.0.0/0.

@@ -1,0 +1,7 @@
+# Copy to backend.tfvars (gitignored). Shared by every layer; each backend.tf sets its own prefix.
+#   cd <env>/<layer> && terraform init -backend-config=../../backend.tfvars
+#
+# Bucket: terraform/bootstrap output bucket_name. Prod in its own project → its own bucket
+# (use a second file, e.g. backend.prod.tfvars).
+
+bucket = "your-gcp-project-id-tfstate"

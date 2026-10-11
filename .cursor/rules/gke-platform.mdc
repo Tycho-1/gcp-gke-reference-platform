@@ -1,0 +1,14 @@
+---
+description: GCP GKE reference platform — Terraform layout and agent conventions
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+Read `AGENTS.md` at repo root before making changes.
+
+This is an independent portfolio repo (sister to aws-eks-reference-platform), not tied to any employer or job application.
+
+Terraform: modules = GCP only; environments/<env>/10-foundation = VPC + GKE, environments/<env>/20-platform = Flux bootstrap (separate state). Argo alternative lives in examples/argocd-platform.
+Envs are dev/prod — keep them in parity. One GitOps tool per cluster. GCS state via bootstrap/ + per-layer backend.tf prefix.
+Do not put app workloads in foundation Terraform. Minimize diff scope. Never commit secrets, tfvars.secrets, or state files.

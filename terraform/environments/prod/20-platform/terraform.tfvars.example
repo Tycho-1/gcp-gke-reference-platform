@@ -1,0 +1,10 @@
+# Copy to terraform.tfvars (gitignored). Secrets go in terraform.tfvars.secrets.
+
+project_id = "your-gcp-prod-project-id"
+region     = "europe-west4"
+# cluster_name = "platform-ref-gke-prod"  # default; must match ../10-foundation output
+
+# Fleet repo: push examples/flux-fleet-sample/ first (needs at least one commit).
+flux_git_url    = "https://github.com/YOU/gcp-gke-fleet.git"
+flux_token_auth = true # false = SSH deploy key
+# flux_path     = ""   # default: clusters/platform-ref-gke-prod

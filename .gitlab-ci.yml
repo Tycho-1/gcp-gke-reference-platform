@@ -1,0 +1,6 @@
+# Planned — GitLab CI: build → Artifact Registry → helm upgrade on GKE
+# See todolist.md P3. Terraform / manifest checks run in .github/workflows/ci.yml.
+#
+# stages:
+#   - build
+#   - deploy

@@ -1,0 +1,84 @@
+# -----------------------------------------------------------------------------
+# Argo CD Helm values — merged with chart defaults (argo-cd from argo-helm).
+# Pin chart in Terraform: var.argocd_chart_version
+# Reference: https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd
+#
+# Best-practice themes:
+# - TLS on the API server (no --insecure); use port-forward to :443 or Ingress+cert-manager
+# - Requests/limits on core workloads (tune for your cluster size)
+# - Dex off until you configure SSO (smaller attack surface + fewer pods)
+# - UI “exec into pod” off by default (enable only with strict RBAC if needed)
+# - Notifications off until you configure notifiers
+# -----------------------------------------------------------------------------
+
+configs:
+  params:
+    # argocd-cmd-params: require TLS on the server (browser uses https://...:443)
+    # Quoted keys so YAML does not parse "server" as a nested mapping
+    "server.insecure": "false"
+
+  cm:
+    # Dangerous in multi-tenant clusters; keep false until you need it + RBAC review
+    "exec.enabled": "false"
+    # admin.enabled is set from Terraform (var.argocd_admin_enabled) in argocd.tf
+
+# SSO broker — enable only when you set dex.config (or use OIDC on configs.cm)
+dex:
+  enabled: false
+
+server:
+  resources:
+    requests:
+      cpu: 125m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  # service.type is set from Terraform (ClusterIP vs LoadBalancer)
+
+controller:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 2Gi
+
+repoServer:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: "1"
+      memory: 512Mi
+
+applicationSet:
+  enabled: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# Optional controller — leave off until you configure templates / notifiers
+notifications:
+  enabled: false
+
+redis:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+# Hardening: chart can create NetworkPolicies per component (review with your CNI)
+global:
+  networkPolicy:
+    create: false
+    defaultDenyIngress: false

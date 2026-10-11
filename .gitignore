@@ -1,0 +1,26 @@
+# Terraform
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+# Commit lock files for root stacks (bootstrap/, environments/*); child modules don't need one.
+terraform/modules/**/.terraform.lock.hcl
+**/terraform.tfvars
+**/terraform.tfvars.secrets
+**/backend.tfvars
+**/backend.*.tfvars
+**/*.auto.tfvars
+**/crash.log
+**/override.tf
+**/*_override.tf
+
+terraform/environments/_archive/
+
+# Secrets
+**/*.pem
+**/*.key
+**/*-credentials.json
+
+# OS / IDE
+.DS_Store
+.idea/
+*.swp

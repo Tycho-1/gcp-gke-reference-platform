@@ -1,0 +1,13 @@
+# Copy to terraform.tfvars (gitignored).
+
+project_id = "your-gcp-project-id"
+region     = "europe-west4"
+
+# Control plane IP endpoint allowlist — see ../../docs/master-authorized-networks.md
+# Solo: curl -s ifconfig.me → /32. Company: office/VPN CIDR. Lab-only: 0.0.0.0/0 (plan warns).
+master_authorized_networks = [
+  { cidr_block = "203.0.113.10/32", display_name = "my-workstation" }
+]
+
+# Optional: single zone for a cheaper, faster lab cluster.
+# cluster_zones = ["europe-west4-b"]
