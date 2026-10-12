@@ -43,17 +43,14 @@ resource "helm_release" "argocd" {
     local.argocd_values_overrides,
   ]
 
-  set {
-    name  = "server.service.type"
-    value = var.argocd_server_service_type
-  }
-
-  dynamic "set" {
-    for_each = var.argocd_global_domain != "" ? [var.argocd_global_domain] : []
-    content {
+  set = concat(
+    [{
+      name  = "server.service.type"
+      value = var.argocd_server_service_type
+    }],
+    var.argocd_global_domain != "" ? [{
       name  = "global.domain"
-      value = set.value
-    }
-  }
-
+      value = var.argocd_global_domain
+    }] : [],
+  )
 }

@@ -19,27 +19,26 @@ locals {
   dns_endpoint = try(data.google_container_cluster.this.control_plane_endpoints_config[0].dns_endpoint_config[0].endpoint, "")
   use_dns      = var.use_dns_endpoint && local.dns_endpoint != ""
 
-  kube_host = local.use_dns ? "https://${local.dns_endpoint}" : "https://${data.google_container_cluster.this.endpoint}"
-  kube_ca   = local.use_dns ? null : base64decode(data.google_container_cluster.this.master_auth[0].cluster_ca_certificate)
-}
-
-provider "kubernetes" {
-  host                   = local.kube_host
-  cluster_ca_certificate = local.kube_ca
-  token                  = data.google_client_config.default.access_token
-}
-
-provider "helm" {
-  kubernetes {
-    host                   = local.kube_host
-    cluster_ca_certificate = local.kube_ca
+  kubernetes_config = {
+    host                   = local.use_dns ? "https://${local.dns_endpoint}" : "https://${data.google_container_cluster.this.endpoint}"
+    cluster_ca_certificate = local.use_dns ? null : base64decode(data.google_container_cluster.this.master_auth[0].cluster_ca_certificate)
     token                  = data.google_client_config.default.access_token
   }
 }
 
+provider "kubernetes" {
+  host                   = local.kubernetes_config.host
+  cluster_ca_certificate = local.kubernetes_config.cluster_ca_certificate
+  token                  = local.kubernetes_config.token
+}
+
+provider "helm" {
+  kubernetes = local.kubernetes_config
+}
+
 provider "kubectl" {
-  host                   = local.kube_host
-  cluster_ca_certificate = local.kube_ca
-  token                  = data.google_client_config.default.access_token
+  host                   = local.kubernetes_config.host
+  cluster_ca_certificate = local.kubernetes_config.cluster_ca_certificate
+  token                  = local.kubernetes_config.token
   load_config_file       = false
 }
