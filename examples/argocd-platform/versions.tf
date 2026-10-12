@@ -9,7 +9,7 @@ terraform {
     helm = {
       source = "hashicorp/helm"
       # v3.x uses different helm_release / provider schema; keep 2.x for set{} blocks and kubernetes {}.
-      version = ">= 2.12.0, < 3.0.0"
+      version = ">= 2.12.0, < 3.3.1"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
