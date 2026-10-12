@@ -8,10 +8,12 @@ updates:
       actions:
         patterns: ["*"]
 
+  # One lockfile per deploy root (no module path — gke-foundation has no committed lock).
+  # Do not group Terraform updates across directories: grouped multi-dir runs can hit
+  # InvalidUpdatedDependencies ("Previous version was not provided for hashicorp/google").
   - package-ecosystem: terraform
     directories:
       - /terraform/bootstrap
-      - /terraform/modules/gke-foundation
       - /terraform/environments/dev/10-foundation
       - /terraform/environments/dev/20-platform
       - /terraform/environments/prod/10-foundation
@@ -19,6 +21,3 @@ updates:
       - /examples/argocd-platform
     schedule:
       interval: weekly
-    groups:
-      terraform:
-        patterns: ["*"]

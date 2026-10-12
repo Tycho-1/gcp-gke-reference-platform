@@ -30,4 +30,4 @@ Pin versions: workflow `env` block (`TFLINT_VERSION`, `TRIVY_VERSION`, `KUBECONF
 
 ## Dependabot
 
-[`dependabot.yml`](dependabot.yml) — weekly updates for **GitHub Actions** and **Terraform** provider/module lockfiles in all roots listed there.
+[`dependabot.yml`](dependabot.yml) — weekly **GitHub Actions** (grouped) and **Terraform** lockfiles per deploy root (ungrouped; multi-directory groups break on shared providers like `hashicorp/google`).
