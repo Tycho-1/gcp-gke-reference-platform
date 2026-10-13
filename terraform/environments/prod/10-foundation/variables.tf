@@ -6,7 +6,7 @@ variable "project_id" {
 variable "region" {
   description = "Region for the VPC and regional GKE cluster."
   type        = string
-  default     = "europe-west4"
+  default     = "europe-west1"
 }
 
 variable "master_authorized_networks" {

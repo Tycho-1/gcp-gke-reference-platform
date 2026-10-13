@@ -1,7 +1,7 @@
 # Copy to terraform.tfvars (gitignored). Use a separate GCP project from dev.
 
 project_id = "your-gcp-prod-project-id"
-region     = "europe-west4"
+region     = "europe-west1"
 
 # Office/VPN ranges, or [] to allow only the IAM-gated DNS endpoint.
 master_authorized_networks = [

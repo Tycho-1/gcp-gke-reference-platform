@@ -26,7 +26,7 @@ Security settings are identical to dev ([ADR 0006](../../../../docs/adr/0006-sec
 |----------|----------|-------|
 | `project_id` | yes | Use a separate prod project |
 | `master_authorized_networks` | yes | Office/VPN ranges. Never `0.0.0.0/0` |
-| `region` | no | Default `europe-west4` |
+| `region` | no | Default `europe-west1` |
 
 ## Usage
 
@@ -48,7 +48,7 @@ Or explicitly (`project_id` / `region` from `terraform.tfvars`; cluster `platfor
 
 ```bash
 gcloud container clusters get-credentials platform-ref-gke-prod \
-  --region europe-west4 \
+  --region europe-west1 \
   --project YOUR_PROJECT_ID \
   --dns-endpoint
 kubectl get nodes

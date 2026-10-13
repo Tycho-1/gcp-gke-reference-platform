@@ -18,7 +18,7 @@ variable "master_authorized_networks" {
 }
 
 variable "cluster_zones" {
-  description = "Node zones. Empty = up to 3 zones in the region (more HA, more nodes). One zone (e.g. [\"europe-west4-b\"]) = cheaper, faster create/destroy."
+  description = "Node zones. Empty = up to 3 zones in the region (more HA, more nodes). One zone (e.g. [\"europe-west1-b\"]) = cheaper, faster create/destroy."
   type        = list(string)
   default     = []
 }

@@ -1,5 +1,5 @@
 project_id = "your-gcp-project-id"
-region     = "europe-west4"
+region     = "europe-west1"
 
 # bucket_name = "custom-tfstate-bucket-name"  # default: {project_id}-tfstate
 # force_destroy = true  # lab only — allows bucket delete when non-empty

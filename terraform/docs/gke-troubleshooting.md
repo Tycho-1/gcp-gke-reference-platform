@@ -8,7 +8,7 @@ The Terraform module **does** create both (`module.network` + `module.gke` under
 
 1. **Wrong place in the console** — Clusters are under **Kubernetes Engine → Clusters**, not under **VPC network**. The VPC name is usually `{name}-{environment}` (e.g. `platform-ref-gke-dev`); the cluster has the **same name** in GKE.
 
-2. **Wrong project or region** — The cluster is **regional** in `var.region` (e.g. `europe-west4`). Confirm the project and region selectors in the console match `terraform.tfvars`.
+2. **Wrong project or region** — The cluster is **regional** in `var.region` (e.g. `europe-west1`). Confirm the project and region selectors in the console match `terraform.tfvars`.
 
 3. **Apply stopped or failed after the VPC** — GKE creation often takes **10–20+ minutes**. If `terraform apply` errored or was cancelled mid-way, you can have VPC in state without a finished cluster. Check the terminal output, then:
 
@@ -86,7 +86,7 @@ GCP sometimes cannot place your **`machine_type`** in **one or more zones**. Ter
 
    ```bash
    gcloud container node-pools delete default \
-     --cluster=platform-ref-gke-dev --region=europe-west4 --project=<PROJECT_ID> --quiet
+     --cluster=platform-ref-gke-dev --region=europe-west1 --project=<PROJECT_ID> --quiet
    terraform apply
    ```
 
@@ -100,7 +100,7 @@ GCP sometimes cannot place your **`machine_type`** in **one or more zones**. Ter
 
 **Terraform** prints `Still creating...` every **10 seconds** while the provider waits on the API — that is **polling**, not proof it is stuck.
 
-**Fewer zones → usually shorter creates:** with **`cluster_zones = []`**, the upstream module can place nodes in **up to three zones** (more HA, more VMs). With **`cluster_zones = ["europe-west4-b"]`** (dev `terraform.tfvars`), the pool uses **one zone** — fewer instances to provision, often **noticeably faster** for dev. Use **multi‑zone** (`[]` or several zones) for production‑style resilience.
+**Fewer zones → usually shorter creates:** with **`cluster_zones = []`**, the upstream module can place nodes in **up to three zones** (more HA, more VMs). With **`cluster_zones = ["europe-west1-b"]`** (dev `terraform.tfvars`), the pool uses **one zone** — fewer instances to provision, often **noticeably faster** for dev. Use **multi‑zone** (`[]` or several zones) for production‑style resilience.
 
 ## Node pool sizing (min / max / autoscaler)
 

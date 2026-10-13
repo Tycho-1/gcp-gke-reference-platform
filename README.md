@@ -138,7 +138,7 @@ With the `dev` shape, expect **roughly €3–8 per day**:
 - Cloud NAT.
 
 Most of that is the cluster management fee (GKE's free-tier credit covers one cluster per billing account), plus the nodes and the NAT gateway. For real numbers, use the [pricing calculator](https://cloud.google.com/products/calculator). To lower the cost further:
-- set `cluster_zones = ["europe-west4-a"]`;
+- set `cluster_zones = ["europe-west1-a"]`;
 - use a smaller `machine_type` in `dev/10-foundation/main.tf`.
 
 `prod` (on-demand, multi-zone, min 1 node per zone) costs noticeably more.

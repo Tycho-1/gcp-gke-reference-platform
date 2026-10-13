@@ -56,7 +56,7 @@ module "gke" {
   project_id  = var.project_id
   name        = "myapp"
   environment = "dev"
-  region      = "europe-west4"
+  region      = "europe-west1"
 
   # Optional overrides — see variables.tf for full list
   # subnet_cidr     = "10.0.0.0/20"

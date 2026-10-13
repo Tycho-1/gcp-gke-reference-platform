@@ -64,7 +64,7 @@ CI: `.github/workflows/ci.yml` — see [`.github/CI.md`](.github/CI.md) (fmt/val
 
 ## Conventions
 
-- Match existing style: terraform-google-modules pins, `europe-west4` default region, dev/prod parity (change both when changing one).
+- Match existing style: terraform-google-modules pins, `europe-west1` default region, dev/prod parity (change both when changing one).
 - Minimize scope — focused diffs; no unrelated refactors.
 - No secrets in git — use `*.example` files + gitignored `terraform.tfvars`, `terraform.tfvars.secrets`, `backend.tfvars`.
 - Document decisions in `ARCHITECTURE.md` or env README when non-obvious.

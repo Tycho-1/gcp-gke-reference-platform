@@ -1,7 +1,7 @@
 # Copy to terraform.tfvars (gitignored).
 
 project_id   = "your-gcp-project-id"
-region       = "europe-west4"
+region       = "europe-west1"
 cluster_name = "platform-ref-gke-dev" # from 10-foundation output cluster_name
 
 argocd_chart_version       = "9.4.11"

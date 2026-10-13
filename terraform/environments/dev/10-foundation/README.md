@@ -24,7 +24,7 @@ Security settings (private nodes, Dataplane V2, Workload Identity, DNS endpoint,
 |----------|----------|-------|
 | `project_id` | yes | |
 | `master_authorized_networks` | yes | Source IPs allowed on the **control plane IP endpoint** — see [master authorized networks](../../../docs/master-authorized-networks.md). Solo: your `/32`; company: office/VPN CIDRs; lab-only: `0.0.0.0/0` (plan warns). Admin via DNS endpoint does not require widening this list |
-| `region` | no | Default `europe-west4` |
+| `region` | no | Default `europe-west1` |
 | `cluster_zones` | no | Default `[]` |
 
 ## Usage
@@ -48,7 +48,7 @@ Same thing explicitly (use `project_id` and `region` from your `terraform.tfvars
 
 ```bash
 gcloud container clusters get-credentials platform-ref-gke-dev \
-  --region europe-west4 \
+  --region europe-west1 \
   --project YOUR_PROJECT_ID \
   --dns-endpoint
 kubectl get nodes

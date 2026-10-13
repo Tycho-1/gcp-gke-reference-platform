@@ -142,13 +142,13 @@ variable "release_channel" {
 }
 
 variable "cluster_zones" {
-  description = "Zones where the node pool runs (passed to terraform-google-kubernetes-engine as `zones`). Empty = upstream picks up to 3 zones in `region` (more HA, slower create/destroy). Set one zone (e.g. [\"europe-west4-a\"]) for faster dev; control plane stays regional."
+  description = "Zones where the node pool runs (passed to terraform-google-kubernetes-engine as `zones`). Empty = upstream picks up to 3 zones in `region` (more HA, slower create/destroy). Set one zone (e.g. [\"europe-west1-a\"]) for faster dev; control plane stays regional."
   type        = list(string)
   default     = []
 
   validation {
     condition     = length(var.cluster_zones) == 0 || alltrue([for z in var.cluster_zones : startswith(z, "${var.region}-")])
-    error_message = "Each cluster_zones entry must be a zone in var.region (e.g. europe-west4-a when region is europe-west4)."
+    error_message = "Each cluster_zones entry must be a zone in var.region (e.g. europe-west1-a when region is europe-west1)."
   }
 }
 

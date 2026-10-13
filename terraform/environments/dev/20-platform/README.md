@@ -18,7 +18,7 @@ Creates: `flux-system` namespace, `terraform-outputs` ConfigMap (cluster name, r
 |----------|----------|-------|
 | `project_id` | yes | |
 | `flux_git_url` | yes | e.g. `https://github.com/<you>/<fleet-repo>.git` |
-| `region` | no | Must match foundation. Default `europe-west4` |
+| `region` | no | Must match foundation. Default `europe-west1` |
 | `cluster_name` | no | Default `platform-ref-gke-dev` |
 | `flux_token_auth` | no | `true` = PAT (default), `false` = SSH deploy key |
 | `flux_path` | no | Default `clusters/<cluster_name>` |

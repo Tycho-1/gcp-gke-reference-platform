@@ -148,7 +148,7 @@ Terraform uses **`data.google_client_config`** (§5). **`kubectl`**, **`flux` CL
 ```bash
 # DNS-based control-plane endpoint (IAM-gated; no authorized-networks entry needed)
 gcloud container clusters get-credentials platform-ref-gke-dev \
-  --region europe-west4 \
+  --region europe-west1 \
   --project <PROJECT_ID> \
   --dns-endpoint
 
