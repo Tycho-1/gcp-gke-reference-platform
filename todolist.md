@@ -11,7 +11,6 @@ Aligned with [`platform-requirements.md`](platform-requirements.md). Priority or
 - [x] LICENSE, CI (fmt / validate / tflint / Trivy / kubeconform), pre-commit, Dependabot
 - [x] Secure-by-default GKE (Dataplane V2, security posture, DNS endpoint, required APIs)
 - [x] ADRs in `docs/adr/`
-- [ ] `git init` + push to **Tycho-1/gcp-gke-reference-platform** on GitHub
 - [ ] Portfolio card on [tycho-1.github.io](https://tycho-1.github.io)
 - [x] Verify `terraform apply` on the old `gke-flux` root — cluster + Flux bootstrap + sample app sync **2026-09-22**
 - [x] Re-verify on `dev/10-foundation` + `dev/20-platform` (after secure defaults + layer split) — **2026-10-08**

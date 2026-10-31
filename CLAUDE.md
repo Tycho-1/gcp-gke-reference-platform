@@ -8,4 +8,4 @@ Same map as [AGENTS.md](AGENTS.md). Read that file first.
 
 **Docs:** [README.md](README.md) · [terraform/ARCHITECTURE.md](terraform/ARCHITECTURE.md) · [docs/adr/](docs/adr/)
 
-**Priority:** see [todolist.md](todolist.md) P0 (git init, apply + screenshot, GitHub push).
+**Priority:** see [todolist.md](todolist.md) P0 (README screenshot, portfolio card).
